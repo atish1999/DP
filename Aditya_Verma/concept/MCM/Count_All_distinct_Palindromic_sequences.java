@@ -1,7 +1,7 @@
-package Concepts;
+package Aditya_Verma.concept.MCM;
 
 /*
-                                "जय श्री कृष्णा"
+                               
 */
 import java.util.*;
 import java.io.*;

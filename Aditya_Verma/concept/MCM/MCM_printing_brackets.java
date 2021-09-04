@@ -1,7 +1,7 @@
-package Concepts;
+package Aditya_Verma.concept.MCM;
 
 /*
-							"जय श्री कृष्णा"
+							"à¤œà¤¯ à¤¶à¥�à¤°à¥€ à¤•à¥ƒà¤·à¥�à¤£à¤¾"
 */
 import java.util.*;
 import java.io.*;
@@ -113,7 +113,7 @@ public class MCM_printing_brackets implements Runnable {
 
 		dp = new int[n][n];
 		b = new int[n][n];
-		sb = new StringBuilder(); 
+		sb = new StringBuilder();
 		for (int i = 1; i < n; i++)
 			dp[i][i] = 0;
 
@@ -133,8 +133,8 @@ public class MCM_printing_brackets implements Runnable {
 				}
 			}
 		}
-		
-		print(1, n-1);
+
+		print(1, n - 1);
 		out.print(sb.toString());
 
 	}

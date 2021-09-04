@@ -1,11 +1,9 @@
-package Concepts;
+package Aditya_Verma.concept.MCM;
 
 /*
-							"जय श्री कृष्णा"
+							"à¤œà¤¯ à¤¶à¥�à¤°à¥€ à¤•à¥ƒà¤·à¥�à¤£à¤¾"
 */
 import java.util.*;
-
-import Concepts.Longest_Increasing_Subsequest.FastReader;
 
 import java.io.*;
 
@@ -90,66 +88,49 @@ public class Scrambled_String_Re implements Runnable {
 	public static void main(String[] args) throws java.lang.Exception {
 		new Thread(null, new Scrambled_String_Re(), "Main", 1 << 26).start();
 	}
-/*
 
+	/*
+	 * 
+	 * 
+	 * Scramble String using Memoization(Dynamic Programming) Given a string s1, we
+	 * may represent it as a binary tree by partitioning it to two non-empty
+	 * substrings recursively. Below is one possible representation of A =
+	 * â€œgreatâ€�: great / \ gr eat / \ / \ g r e at / \ a t To scramble the
+	 * string, we may choose any non-leaf node and swap its two children.
+	 * 
+	 * For example, if we choose the node â€œgrâ€� and swap its two children, it
+	 * produces a scrambled string â€œrgeatâ€�.
+	 * 
+	 * rgeat / \ rg eat / \ / \ r g e at / \ a t We say that â€œrgeatâ€� is a
+	 * scrambled string of â€œgreatâ€�.
+	 * 
+	 * Similarly, if we continue to swap the children of nodes â€œeatâ€� and
+	 * â€œatâ€�, it produces a scrambled string â€œrgtaeâ€�.
+	 * 
+	 * rgtae / \ rg tae / \ / \ r g ta e / \ t a We say that â€œrgtaeâ€� is a
+	 * scrambled string of â€œgreatâ€�.
+	 */
+	static Map<String, Boolean> h;
 
-Scramble String using Memoization(Dynamic Programming)
-Given a string s1, we may represent it as a binary tree by partitioning it to two non-empty substrings recursively.
-Below is one possible representation of A = “great”:
- great
-   /    \
-  gr    eat
- / \    /  \
-g   r  e   at
-           / \
-          a   t
-To scramble the string, we may choose any non-leaf node and swap its two children.
-
-For example, if we choose the node “gr” and swap its two children, it produces a scrambled string “rgeat”.
-
-    rgeat
-   /    \
-  rg    eat
- / \    /  \
-r   g  e   at
-           / \
-          a   t
-We say that “rgeat” is a scrambled string of “great”.
-
-Similarly, if we continue to swap the children of nodes “eat” and “at”, it produces a scrambled string “rgtae”.
-
-    rgtae
-   /    \
-  rg    tae
- / \    /  \
-r   g  ta  e
-       / \
-      t   a
-We say that “rgtae” is a scrambled string of “great”.
- */
-	static Map<String,Boolean> h;
-	
 	boolean fun(String a, String b) {
 		if (a.equals(b))
 			return true;
 		if (a.length() <= 1)
 			return false;
-		
-		String key=a+"#"+b;
-		if(h.containsKey(key)) {
+
+		String key = a + "#" + b;
+		if (h.containsKey(key)) {
 			return h.get(key);
 		}
 		int n = a.length();
 
-		for (int i = 1; i < n; i++) { 
-			if ((fun(a.substring(0, i), b.substring(n - i)) 
-					&& fun(a.substring(i), b.substring(0, n - i)))
-					|| ((fun(a.substring(0, i), b.substring(0, i)))
-							&& (fun(a.substring(i), b.substring(i))))) {
+		for (int i = 1; i < n; i++) {
+			if ((fun(a.substring(0, i), b.substring(n - i)) && fun(a.substring(i), b.substring(0, n - i)))
+					|| ((fun(a.substring(0, i), b.substring(0, i))) && (fun(a.substring(i), b.substring(i))))) {
 				h.put(key, true);
 				return true;
 			}
-				
+
 		}
 		h.put(key, false);
 		return false;
@@ -167,8 +148,8 @@ We say that “rgtae” is a scrambled string of “great”.
 			out.print("yes");
 			return;
 		}
-		
-		h=new HashMap<>();
+
+		h = new HashMap<>();
 		out.print(fun(a, b) ? "yes" : "no");
 	}
 
@@ -185,31 +166,15 @@ We say that “rgtae” is a scrambled string of “great”.
 		long end = System.nanoTime(); // Program End
 		System.err.println("Time taken: " + (end - start) / 1000000 + " ms");
 	}
-/*
- * 
-6
-great
-great
-great
-rgate
-great
-grewq
-abcde
-abcdes
-great
-rgeat
-great
-graet
 
-yes
-yes
-no
-no
-yes
-yes
-
-
- */
+	/*
+	 * 
+	 * 6 great great great rgate great grewq abcde abcdes great rgeat great graet
+	 * 
+	 * yes yes no no yes yes
+	 * 
+	 * 
+	 */
 	static class CP {
 
 		static boolean isPrime(long n) {
