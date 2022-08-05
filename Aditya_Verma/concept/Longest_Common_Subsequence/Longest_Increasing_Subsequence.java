@@ -105,21 +105,36 @@ public class Longest_Increasing_Subsequence implements Runnable {
 		 * in worst case answer would be 1 i.e for array 7 6 5 4 3 2 1 answer would be 1
 		 * and in this case answer would contain 7
 		 */
+
+		/**
+		 * 
+		 * state dp[i] => denotes the length of the longest Increasing upto index i.
+		 * 
+		 */
+
 		Arrays.fill(dp, 1);
 		int max = Integer.MIN_VALUE;
 		for (int i = 1; i < n; i++) {
 			for (int j = 0; j < i; j++) {
 				if (a[j] < a[i])
-/*
- *  Above condition of the if block will be changed according to
- *  following situations
- *  for lomgest increasing  a[j]<a[i]
- *  for longest non decreasing a[j]<= a[i]
- *  for longest decreasing a[j]>a[i]
- *  for longesr non increasing a[j]>=a[i]
- */
+					/*
+					 * Above condition of the if block will be changed according to following
+					 * situations for longest increasing a[j]<a[i] for longest non decreasing a[j]<=
+					 * a[i] for longest decreasing a[j]>a[i] for longest non increasing a[j]>=a[i]
+					 */
 					dp[i] = Math.max(dp[i], dp[j] + 1);
+				/*
+				 * above statement is saying that if we are adding LIS up to j with the current
+				 * index i whether that sequence will be giving the maximum LIS for i-th index
+				 * or not.
+				 * 
+				 */
+
 			}
+
+			/*
+			 * we have to return the max possible LIS of the array.
+			 */
 			max = Math.max(max, dp[i]);
 		}
 		out.print(max);
