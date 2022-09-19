@@ -92,19 +92,33 @@ public class Top_Down implements Runnable {
 
 	static int dp[][];
 
-	void solve() {
-		int n = fr.nextInt();
-		int a[] = fr.nextIntArray(n);
-		dp = new int[n][n];
-/*
-	this is the base case i.e. when there is one element in the array
-	then cost will be zero for multiplying one matrix
- */
-		for (int i = 1; i < n; i++)
-			dp[i][i] = 0;
-/*
- * we are moving diagionally 
- */
+	int gapTheory(int n, int[] a) {
+
+		for (int gap = 0; gap < n; ++gap) {
+			for (int l = 0, r = gap; r < n; ++r, ++l) {
+				if (gap <= 1) {
+					dp[l][r] = 0;
+				} else if (gap == 2) {
+					dp[l][r] = a[l] * a[l + 1] * a[r];
+				} else {
+					int min = Integer.MAX_VALUE;
+					for (int m = l + 1; m < r; ++m) {
+						int tmp = a[l] * a[m] * a[r] + dp[l][m] + dp[m][r];
+						min = Math.min(min, tmp);
+					}
+
+					dp[l][r] = min;
+				}
+			}
+		}
+
+		return dp[0][n - 1];
+	}
+
+	int chainTheory(int n, int[] a) {
+		/*
+		 * we are moving diagonally
+		 */
 		for (int L = 2; L < n; L++) { // L is the chain length
 
 			for (int i = 1; i < n - L + 1; i++) {
@@ -120,7 +134,22 @@ public class Top_Down implements Runnable {
 			}
 		}
 
-		out.print(dp[1][n - 1]);
+		return dp[1][n - 1];
+	}
+
+	void solve() {
+		int n = fr.nextInt();
+		int a[] = fr.nextIntArray(n);
+		dp = new int[n][n];
+		/*
+		 * this is the base case i.e. when there is one element in the array then cost
+		 * will be zero for multiplying one matrix
+		 */
+		for (int i = 1; i < n; i++)
+			dp[i][i] = 0;
+
+		int ans = gapTheory(n, a);
+		out.print(ans);
 	}
 
 	@Override
